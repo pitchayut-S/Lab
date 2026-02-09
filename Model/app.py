@@ -61,12 +61,15 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+import os
+import joblib
 # Load model
 @st.cache_resource
 def load_model():
-    """Load the trained Iris classification model"""
-    with open('iris_model.pkl', 'rb') as f:
-        model = joblib.load(f)
+    base_dir = os.path.dirname(__file__)   # โฟลเดอร์ที่มี app.py
+    model_path = os.path.join(base_dir, "iris_model.pkl")
+
+    model = joblib.load(model_path)
     return model
 
 # Load Iris data for reference
